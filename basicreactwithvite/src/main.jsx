@@ -1,7 +1,7 @@
 import React, { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.jsx'
-
+import Add from "./practice.jsx"
 
 // const CustomElement = {
 //   type : 'a',
@@ -29,5 +29,6 @@ createRoot(document.getElementById('root')).render(
   
     // anotherElement 
 
-    CustomElement
+    // CustomElement
+    <Add />
 )
