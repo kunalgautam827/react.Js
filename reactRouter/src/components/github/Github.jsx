@@ -2,14 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
 function Github() {
-  const data = useLoaderData();
+  // const data = useLoaderData();
+  const [us,setUs] = useState("")
 
-  //   const [data, setData] = useState({});
-  //   useEffect(() => {
-  //     fetch("https://api.github.com/users/kunalgautam827")
-  //       .then((response) => response.json())
-  //       .then((response) => setData(response));
-  //   }, []);
+    const [data, setData] = useState({});
+    useEffect(() => {
+      fetch(`https://api.github.com/users/${us}`)
+        .then((response) => response.json())
+        .then((response) => setData(response));
+    }, [us]);
 
   return (
     <>
@@ -21,12 +22,12 @@ function Github() {
           <ul>
             <li>
               <label htmlFor="userName">enter username</label>
-              <input id="userName" className="bg-amber-100" type="text" />
+              <input onChange={(e)=> setUs(e.target.value)} id="userName" className="bg-amber-100" type="text" />
             </li>
             <li>userName : {data.login}</li>
             <li>public_repos : {data.public_repos}</li>
             <li className="underline text-blue-800">
-              <a target="_blank" href={`https://github.com/${data.login}`}>
+              <a target="_blank" href={`https://github.com/${us}`}>
                 view profile
               </a>
             </li>
@@ -40,8 +41,8 @@ function Github() {
 export default Github;
 
 // loader function
-export const githubInfoLoader = async () => {
+// export const githubInfoLoader = async () => {
     
-  const res = await fetch("https://api.github.com/users/kunalgautam827");
-  return res.json();
-};
+//   const res = await fetch("https://api.github.com/users/kunalgautam827");
+//   return res.json();
+// };
