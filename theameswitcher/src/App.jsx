@@ -13,7 +13,7 @@ function App() {
     setThemeMode("dark")
   }
   useEffect(()=>{
-    let mode = document.querySelector('html').classList
+    let mode = document.querySelector("html").classList
     mode.remove("light","dark")
     mode.add(themeMode)
   },[themeMode]);
@@ -33,6 +33,7 @@ function App() {
         </div>
       </div>
       </ThemeProvider>
+      
     </>
   );
 }
