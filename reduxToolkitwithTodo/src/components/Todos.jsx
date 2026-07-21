@@ -7,7 +7,7 @@ import { useState } from "react";
 function Todos() {
   const [input, setInput] = useState("");
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => state.todo.todos);
   
 
   return (
@@ -15,11 +15,11 @@ function Todos() {
       {
         (todos || []).map((todo) => (
         <div key={todo.id}
-          className={`text-white flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300  text-black "bg-[#ccbed7]" `}
+          className={`text-white flex border border-black/10 rounded-lg px-3 py-1.5 gap-x-3 shadow-sm shadow-white/50 duration-300 "bg-[#ccbed7]" `}
         >
           <input
             type="text"
-            className={` outline-none w-full bg-transparent rounded-lg `}
+            className={`outline-none w-full bg-transparent rounded-lg `}
             value={todo.text}
             readOnly={true}
           />
