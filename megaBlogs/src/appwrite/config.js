@@ -66,7 +66,7 @@ export class Service {
 
   async getPost(slug){
     try {
-      await this.tablseDB.getRow(
+      return await this.tablseDB.getRow(
         conf.appwriteDatabaseId,
         conf.appwriteTableId,
         slug,
@@ -78,7 +78,7 @@ export class Service {
 
   async getPosts(queries = [Query.equal("status","active")]){
     try {
-      await this.tablseDB.listRows(
+      return await this.tablseDB.listRows(
         conf.appwriteDatabaseId,
         conf.appwriteTableId,
         queries
@@ -103,7 +103,7 @@ export class Service {
 
   async deleteFile(fileId){
      try {
-         await this.storage.deleteFile(
+        return await this.storage.deleteFile(
            conf.appwriteBucketId,
            fileId
         )

@@ -2,6 +2,7 @@ import container from './container/container';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import LogoutBtn from './Header/LogoutBtn';
+import PostForm from './post-form/PostForm';
 import AuthLayout from "./AuthLayout"
 import Button from "./Button"
 import Input from "./Input"
@@ -19,6 +20,7 @@ export {
     Header,
     LogoutBtn,
     AuthLayout,
+    PostForm,
     Button,
     Input,
     Login,
