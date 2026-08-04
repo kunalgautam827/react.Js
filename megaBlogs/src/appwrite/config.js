@@ -9,8 +9,8 @@ export class Service {
     this.client
       .setEndpoint(conf.appwriteURl)
       .setProject(conf.appwriteProjectId);
-    this.storage = new this.Storage(this.client);
-    this.tablseDB = new this.TablesDB(this.client);
+    this.storage = new Storage(this.client);
+    this.tablseDB = new TablesDB(this.client);
   }
 
   async createPost({ title, slug, content, featuredImage, status, userId }) {

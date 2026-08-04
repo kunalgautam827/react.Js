@@ -1,4 +1,4 @@
-import container from './container/container';
+import Container from './container/container';
 import Footer from './Footer/Footer';
 import Header from './Header/Header';
 import LogoutBtn from './Header/LogoutBtn';
@@ -15,7 +15,7 @@ import Signup from './Signup';
 
 
 export {
-    container,
+    Container,
     Footer,
     Header,
     LogoutBtn,

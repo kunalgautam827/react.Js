@@ -1,8 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Logo, LogoutBtn, container } from "../index";
+import { Logo, LogoutBtn, Container } from "../index";
 import { Link, useNavigate } from "react-router-dom";
-import LogoutBtn from './LogoutBtn';
 
 function Header() {
   let authStatus = useSelector((state) => state.auth.status);
@@ -36,7 +35,7 @@ function Header() {
   ];
   return (
     <header className="py-3 shadow bg-gray-400">
-      <container>
+      <Container>
         <nav className="flex">
           <div className="m-4">
             <Link to="/">
@@ -49,7 +48,7 @@ function Header() {
                 <li key={item.name}>
                   <button 
                   className="inline-block px-6 py-2 duration-200 hover:bg-blue-100 rounded-full" 
-                  onClick={navigate(item.slug)}>
+                  onClick={()=>navigate(item.slug)}>
                     {item.name}
                   </button>
                 </li>
@@ -62,7 +61,7 @@ function Header() {
             }
           </ul>
         </nav>
-      </container>
+      </Container>
     </header>
   );
 }
