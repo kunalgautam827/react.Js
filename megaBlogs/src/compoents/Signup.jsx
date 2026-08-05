@@ -9,12 +9,19 @@ import { useForm } from "react-hook-form";
 function Signup() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit  ,formState: { errors }} = useForm();
   const [error, setError] = useState("");
-
+const onError = (errors) => {
+  console.log(errors);
+  
+  console.log(errors);
+};
   const create = async (data) => {
+    console.log("creaet")
     setError("");
     try {
+      console.log("insode create");
+      
       const session = await authService.createAccount(data);
       if (session) {
         const userData = await authService.getCurrentUser();
@@ -35,7 +42,7 @@ function Signup() {
             <Logo width="100%" />
           </span>
         </div>
-        <h2 className="text-center text-2xl font-bold leading-tight">
+        <h2 className="text-center text-black text-2xl font-bold leading-tight">
           Sign up to your account
         </h2>
         <p className="mt-2 text-center text-base text-black/60">
@@ -49,7 +56,7 @@ function Signup() {
         </p>
         {error && <p className="text-red-600 mt-8 text-center">{error}</p>}
 
-        <form onSubmit={handleSubmit(create)}>
+        <form onSubmit={handleSubmit(create,onError)}>
           <Input
             label="Full Name:"
             type="text"
@@ -68,6 +75,11 @@ function Signup() {
               },
             })}
           />
+          {errors.password && (
+  <p className="text-red-500 text-sm mt-1">
+    {errors.password.message}
+  </p>
+)}
           <Input
             label="Password:"
             type="password"
@@ -76,7 +88,7 @@ function Signup() {
               required: "password must be required",
               pattern: {
                 value:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/,
                 message:
                   "Password must be at least 8 characters and include uppercase, lowercase, number, and special character",
               },

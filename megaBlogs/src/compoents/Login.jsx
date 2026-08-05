@@ -16,6 +16,7 @@ function Login() {
   const login = async (data) => {
     setError("");
     try {
+      
       const session = await authService.login(data);
       if (session) {
         const userData = await authService.getCurrentUser();
@@ -76,19 +77,19 @@ function Login() {
               label="Password:"
               type="password"
               placeholder="Enter your password"
-              {...register("passwrod", {
+              {...register("password", {
                 required: "password must be required",
                 pattern: {
                   value:
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@#$!%*?&])[A-Za-z\d@#$!%*?&]{8,}$/,
                   message:
                     "Password must be at least 8 characters and include uppercase, lowercase, number, and special character",
                 },
               })}
             />
-            <BUtton type="submit" className="w-full">
+            <Button type="submit" className="w-full">
               Sign In
-            </BUtton>
+            </Button>
           </div>
         </form>
       </div>

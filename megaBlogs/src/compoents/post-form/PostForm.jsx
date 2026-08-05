@@ -5,12 +5,12 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
-function PostForm({ post }) {
+function PostForm(post) {
   const { register, handleSubmit, watch, control, setValue, getValues } =
     useForm({
       defaultValues: {
         title: post?.title || "",
-        slug: post?.slug || "",
+        slug: post?.$id || "",
         content: post?.content || "",
         status: post?.status || "active",
       },
@@ -20,7 +20,9 @@ function PostForm({ post }) {
   const userData = useSelector((state) => state.auth.userData);
 
   const submit = async (data) => {
-    if (post) {
+    if (Object.keys(post).length !== 0) {
+      console.log(data.image[0]);
+
       const file = (await data.image[0])
         ? appwriteService.uploadFile(data.image[0])
         : null;
@@ -35,13 +37,24 @@ function PostForm({ post }) {
         navigate(`/post/${dbPost.$id}`);
       }
     } else {
+      console.log();
+
+      console.log("else", data.image[0]);
+
       const file = await appwriteService.uploadFile(data.image[0]);
       if (file) {
-        data.featuredImage = file.$id;
-        const dbPost = await appwriteService.createPost({
+        console.log({
           ...data,
+          featuredImage: file.$id,
           userId: userData.$id,
         });
+
+        const dbPost = await appwriteService.createPost({
+          ...data,
+          featuredImage: file.$id,
+          userId: userData.$id,
+        });
+
         if (dbPost) {
           navigate(`/post/${dbPost.$id}`);
         }
@@ -77,13 +90,13 @@ function PostForm({ post }) {
         <Input
           label="Title :"
           placeholder="Title"
-          className="mb-4"
+          className="mb-4 bg-white"
           {...register("title", { required: true })}
         />
         <Input
           label="Slug :"
           placeholder="Slug"
-          className="mb-4"
+          className="mb-4 bg-white"
           {...register("slug", { required: true })}
           onInput={(e) => {
             setValue("slug", slugTransform(e.currentTarget.value), {
@@ -102,14 +115,14 @@ function PostForm({ post }) {
         <Input
           label="Featured Image :"
           type="file"
-          className="mb-4"
+          className="mb-4 bg-gray-500 text-blue-200"
           accept="image/png, image/jpg, image/jpeg, image/gif"
           {...register("image", { required: !post })}
         />
-        {post && (
+        {Object.keys(post).length !== 0 && (
           <div className="w-full mb-4">
             <img
-              src={appwriteService.getFilePreview(post.featuredImage)}
+              src={appwriteService.getFileView(post.featuredImage)}
               alt={post.title}
               className="rounded-lg"
             />

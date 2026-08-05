@@ -14,7 +14,7 @@ export class Service {
   }
 
   async createPost({ title, slug, content, featuredImage, status, userId }) {
-    try {
+    try {      
       return await this.tablseDB.createRow(
         conf.appwriteDatabaseId,
         conf.appwriteTableId,
@@ -85,6 +85,7 @@ export class Service {
       );
     } catch (error) {
       console.log("appwrite :: getPosts :: error ", error);
+      throw error
     }
   }
 
@@ -114,8 +115,8 @@ export class Service {
     }
   }
 
-  getFilePreview(fileId){
-    return this.storage.getFilePreview(
+  getFileView(fileId){
+    return this.storage.getFileView(
         conf.appwriteBucketId,
         fileId
     )

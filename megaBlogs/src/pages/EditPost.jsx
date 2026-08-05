@@ -11,6 +11,8 @@ function EditPost() {
     if (slug) {
       appwriteService.getPost(slug).then((post) => {
         if (post) {
+          
+          
           setPost(post);
         }
       });
@@ -18,7 +20,7 @@ function EditPost() {
       navigate("/");
     }
   }, [slug, navigate]);
-
+  
   return post ? (
     <div className="py-8">
       <Container>

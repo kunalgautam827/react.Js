@@ -1,6 +1,7 @@
 import React from "react";
 import { Controller } from "react-hook-form";
 import { Editor } from "@tinymce/tinymce-react";
+import conf from "../conf/conf";
 function RTE({ name, label, control, defaultValue = "" }) {
   return (
     <div className="w-full">
@@ -10,6 +11,7 @@ function RTE({ name, label, control, defaultValue = "" }) {
         control={control}
         render={({ field }) => (
           <Editor
+          apiKey= {conf.tinymceAPI}
             initialValue={defaultValue}
             // value={field.value}
             init={{
@@ -41,6 +43,19 @@ function RTE({ name, label, control, defaultValue = "" }) {
               ],
               content_style:
                 "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+              tinymceai_token_provider: async () => {
+                await fetch(
+                  `https://demo.api.tiny.cloud/1/v0aq9tvoioxpovafi260gp6fv3a09yp5nw33daons4xy14jy/auth/random`,
+                  { method: "POST", credentials: "include" },
+                );
+                return {
+                  token: await fetch(
+                    `https://demo.api.tiny.cloud/1/v0aq9tvoioxpovafi260gp6fv3a09yp5nw33daons4xy14jy/jwt/tinymceai`,
+                    { credentials: "include" },
+                  ).then((r) => r.text()),
+                };
+              },
+              uploadcare_public_key: "d0b2c28ee2c91dbc353c",
             }}
             onEditorChange={field.onChange}
           />

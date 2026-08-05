@@ -26,10 +26,10 @@ function App() {
   }, []);
 
   return !loading ? 
-  (<div className="min-h-screen bg-gray-400 flex flex-wrap content-between text-red-600">
+  (<div className="min-h-screen bg-gray-400 flex flex-wrap content-between text-black">
   <div className="w-full block bg-gray-400">
   <Header />
-  Todo : <Outlet />
+  <Outlet />
   <Footer />
   </div>
   </div>) : null;
